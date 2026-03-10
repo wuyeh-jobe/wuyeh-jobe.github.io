@@ -14,10 +14,6 @@ author:
   phone: "+971 552881379"
   web: ""
 
-# Optional: set this after you verify the site in Google Search Console
-# Example: "abc123..."
-google_site_verification: "-uVx-nkwKjJChRLHIicZxt1qywd5Df04hIn49yMc6DM"
-
 markdown: kramdown
 kramdown:
   input: GFM
