@@ -5,6 +5,15 @@ title: Home
 
 # {{ site.author.name }}
 
+<img
+	class="profile-photo"
+	src="{{ site.baseurl }}/assets/img/profile.jpg"
+	alt="Profile photo of {{ site.author.name }}"
+	width="180"
+	height="180"
+	loading="lazy"
+/>
+
 <h2>Summary</h2>
 <ul>
 	<li>Research Engineer at <a href="https://huda-lab.github.io/" target="_blank">Huda Lab</a> at New York University Abu Dhabi, building tools and infrastructure for research.</li>

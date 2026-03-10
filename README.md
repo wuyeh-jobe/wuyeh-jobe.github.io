@@ -5,6 +5,7 @@ This repo is a minimal **Jekyll** site (Home + Blog).
 ## Configure
 - Edit `_config.yml` (name, email, and `baseurl` if needed).
 - Add posts in `_posts/` as `YYYY-MM-DD-title.md`.
+- Profile photo: save it as `assets/img/profile.jpg`.
 
 ## GitHub Pages
 In your repo settings:
