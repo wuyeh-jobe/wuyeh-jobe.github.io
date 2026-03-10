@@ -1,0 +1,34 @@
+title: "Wuyeh Jobe"
+description: "Research Engineer at NYU Abu Dhabi. Personal site and blog."
+
+# For a user/organization GitHub Pages site, leave baseurl empty.
+# For a project site, set baseurl to "/<repo-name>".
+# Note: `jekyll-sitemap` uses `url` + `baseurl` to generate absolute URLs.
+# Set `url` to your deployed domain (e.g. https://<username>.github.io).
+url: "https://wuyeh-jobe.github.io"
+baseurl: ""
+
+author:
+  name: "Wuyeh Jobe"
+  email: "jwuyeh@gmail.com"
+  phone: "+971 552881379"
+  web: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+permalink: pretty
+
+collections: {}
+
+plugins:
+  - jekyll-sitemap
+
+# Minimal defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
