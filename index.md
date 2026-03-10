@@ -7,9 +7,9 @@ title: Home
 
 <h2>Summary</h2>
 <ul>
-	<li>Research Engineer at New York University Abu Dhabi, building tools and infrastructure for research.</li>
+	<li>Research Engineer at <a href="https://huda-lab.github.io/" target="_blank">Huda Lab</a> at New York University Abu Dhabi, building tools and infrastructure for research.</li>
 	<li>Worked on 10+ software development projects across The Gambia, Ghana, Rwanda, and the US.</li>
-	<li>Graduate teaching assistant for two graduate-level courses at Carnegie Mellon University Africa.</li>
+	<li>Worked as a Graduate teaching assistant for two graduate-level courses at Carnegie Mellon University Africa.</li>
 </ul>
 
 <h2>Education</h2>
