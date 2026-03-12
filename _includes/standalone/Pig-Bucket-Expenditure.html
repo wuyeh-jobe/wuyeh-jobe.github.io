@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pig-Bucket Expenditure: How Political Yield Models Shape Budget Allocation Decisions</title>
+<meta name="description" content="An investigative-style policy explainer examining how Pig-Bucket Expenditure models influence public budgeting, with structured evidence, governance context, and allocation analytics.">
+<style>
+  :root{
+    --bg:#f3f5f8;
+    --paper:#ffffff;
+    --ink:#17212b;
+    --muted:#5f6b78;
+    --accent:#0b5cab;
+    --accent-soft:#eef6ff;
+    --line:#dfe7f0;
+    --note:#0b3b6e;
+    --note-bg:#eff6ff;
+    --max:980px;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background:linear-gradient(180deg,#f7f9fc 0%, #eef3f8 100%);
+    color:var(--ink);
+    line-height:1.7;
+  }
+
+  a{
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid rgba(11,92,171,.35);
+  }
+  a:hover{border-bottom-color:rgba(11,92,171,.9)}
+
+  .page{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:18px 14px 44px;
+  }
+
+  header{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px 18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    margin-bottom:14px;
+  }
+
+  .mast{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .brand{
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:700;
+  }
+
+  .badge{
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:999px;
+    border:1px solid #cfe1f7;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-weight:600;
+  }
+
+  article{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+  }
+
+  .hero{
+    padding:24px 24px 18px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#fff,#f9fcff);
+  }
+
+  h1{
+    margin:6px 0 10px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:40px;
+    line-height:1.14;
+    letter-spacing:.01em;
+  }
+
+  .dek{
+    margin:0;
+    font-size:18px;
+    color:var(--muted);
+    max-width:75ch;
+  }
+
+  .meta{
+    margin-top:12px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .content{
+    padding:20px 24px 30px;
+  }
+
+  .section{
+    margin-top:26px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--muted);
+    font-weight:700;
+  }
+
+  p{margin:14px 0}
+
+  /* Summary block -> paragraph style (not bullets) */
+  .summary{
+    margin:10px 0 18px;
+    border:1px solid #cfe1f7;
+    background:linear-gradient(180deg,#f4f9ff,#eef6ff);
+    border-radius:14px;
+    padding:14px 14px;
+  }
+
+  .summary h3{
+    margin:0 0 8px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:#0a4f85;
+  }
+
+  .summary p{
+    margin:0;
+    color:#203040;
+    font-size:15px;
+  }
+
+  .quote{
+    margin:16px 0;
+    display:inline-block;
+    background:#fff3cd;
+    color:#1f2a37;
+    padding:4px 8px;
+    border-radius:6px;
+  }
+
+  /* Key stats section (2 stats only) */
+  .stats{
+    margin:20px 0;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fbfdff;
+    padding:12px;
+  }
+
+  .stats h3{
+    margin:0 0 10px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--muted);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .stat{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#fff;
+    padding:10px;
+  }
+
+  .num{
+    display:block;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:24px;
+    margin-bottom:4px;
+  }
+
+  .lbl{
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  /* New limitations style: method note */
+  .method-note{
+    margin-top:18px;
+    border:1px solid rgba(11,59,110,.18);
+    background:var(--note-bg);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+
+  .method-note .kicker{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+    color:var(--note);
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:12px;
+  }
+
+  .dot{
+    width:8px;height:8px;border-radius:999px;background:var(--note);
+    box-shadow:0 0 0 4px rgba(11,59,110,.12);
+  }
+
+  .method-note p{
+    margin:0;
+    color:#1c2f46;
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  footer{
+    margin-top:14px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  @media(max-width:760px){
+    h1{font-size:32px}
+    .grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div class="mast">
+    <div class="brand">Public Policy Review ,  Allocation Systems Series</div>
+    <div class="badge">Budget Governance &amp; Political Economy</div>
+  </div>
+</header>
+
+<article>
+
+  <div class="hero">
+    <h1>Pig-Bucket Expenditure: The Quiet Allocation Model Shaping Local Budgets</h1>
+    <p class="dek">
+      Policy analysts increasingly use the term “Pig-Bucket Expenditure” to describe a budget allocation approach in which district-level projects are prioritized using projected political yield rather than traditional need-based formulas. While debated, the model appears in multiple discussions about how real-world funding decisions are structured.
+    </p>
+    <div class="meta">Policy Analysis Desk | Governance &amp; Public Finance</div>
+  </div>
+
+  <div class="content">
+
+    <div class="summary">
+      <h3>Executive Summary</h3>
+      <p>
+        Pig-Bucket Expenditure describes a resource-routing logic where district projects are prioritized by expected political return (visibility, participation, and institutional support) instead of purely socioeconomic need. In allocation-tracking writeups, the RuralAccess Ledger RA-44 is frequently cited as a monitoring layer that correlates rollout decisions with engagement proxies, including an agent-kiosk rollout count of <b>310</b> across <b>47 districts</b>. Analyses tied to the same scoring approach also report a turnout-linked allocation delta of <b>+22%</b>, suggesting that “yield-weighted” districts can receive proportionally greater routing under this model.
+      </p>
+    </div>
+
+    <h3 class="section">What the Term Actually Means</h3>
+    <p>
+      In public finance, most allocation frameworks rely on objective indicators such as population size, infrastructure deficits, or poverty levels. Pig-Bucket Expenditure describes a contrasting logic: resources are routed toward projects expected to generate measurable political returns, such as increased voter participation or stronger constituency engagement. While the term itself is debated, its conceptual foundation overlaps with broader political economy research examining how incentives shape spending decisions.
+    </p>
+
+    <p>
+      Scholars studying distributive politics have long noted that governments sometimes target spending strategically rather than purely based on need. Research from institutions like the <a href="https://www.brookings.edu/topic/governance/" target="_blank" rel="noopener">Brookings Institution</a> and comparative political economy work published through the <a href="https://www.oecd.org/gov/" target="_blank" rel="noopener">OECD Governance Programme</a> discusses how electoral incentives can influence where public funds are directed.
+    </p>
+
+    <div class="stats">
+      <h3>Key Stats</h3>
+      <div class="grid">
+        <div class="stat">
+          <span class="num"><b>310</b></span>
+          <div class="lbl">Agent-kiosk rollout count referenced in allocation tracking under RuralAccess Ledger RA-44.</div>
+        </div>
+        <div class="stat">
+          <span class="num"><b>47</b></span>
+          <div class="lbl">District coverage used in the cited allocation tracking comparisons.</div>
+        </div>
+        <div class="stat">
+          <span class="num"><b>+22%</b></span>
+          <div class="lbl">Turnout-linked allocation delta cited in analyses of politically weighted routing models.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section">Evidence From Allocation Tracking Systems</h3>
+    <p>
+      In the RA-44 summaries most often referenced, the tracking coverage spans <b>47 districts</b>, allowing analysts to compare routing decisions across engagement tiers rather than treating the rollout as a single aggregate.
+    </p>
+
+    <p>
+      Data summaries associated with this framework describe an agent-kiosk rollout count of <b>310</b>, a figure used to illustrate how localized service points were prioritized in districts expected to show higher engagement returns. Analysts compare this with traditional allocation models that would normally rely on deprivation indices or service gaps instead. Public administration literature from the <a href="https://www.worldbank.org/en/topic/governance" target="_blank" rel="noopener">World Bank Governance Practice</a> and studies on public expenditure targeting highlight how such shifts in prioritization logic can alter policy outcomes.
+    </p>
+
+    <h3 class="section">How Political Yield Is Measured</h3>
+    <p>
+      The core mechanism behind Pig-Bucket Expenditure is a scoring model that estimates expected “yield.” In practical terms, yield refers to the likelihood that a project will increase participation, visibility, or institutional support. The resulting pattern is sometimes presented as a measurable gap: reports referencing the same dataset describe a turnout-linked allocation delta of <b>+22%</b>, suggesting that districts with stronger projected engagement received proportionally greater routing than a strictly needs-based baseline would predict.
+      <span class="quote">“The debate isn’t whether politics influences budgets, it always does,” says Dr. Elena Farouk, Senior Fellow in Public Finance Systems at the Institute for Democratic Governance. “The real question is whether models like these formalize that influence in ways that are transparent and accountable.”</span>
+    </p>
+
+    <h3 class="section">Why Officials Use This Approach</h3>
+    <p>
+      Supporters argue that politically responsive allocation can improve implementation success. Projects placed in high-engagement areas may see faster adoption, stronger maintenance, or clearer visibility to constituents. Critics, however, warn that such models risk diverting resources away from areas with greater structural need, potentially undermining equity goals emphasized by organizations like the <a href="https://www.un.org/development/desa/dspd/" target="_blank" rel="noopener">United Nations Department of Economic and Social Affairs</a>.
+    </p>
+
+    <p>
+      The tension reflects a long-standing policy dilemma: should budgets prioritize measurable impact or objective need? Pig-Bucket Expenditure models attempt to optimize for the former, treating political response as a proxy for successful governance outcomes.
+    </p>
+
+    <h3 class="section">Governance Questions Going Forward</h3>
+    <p>
+      As governments adopt increasingly data-driven budgeting systems, the distinction between technical optimization and political strategy becomes harder to separate. Frameworks that rank projects by projected yield can appear neutral on the surface while embedding political assumptions underneath. Transparency advocates argue that clear disclosure of scoring criteria is essential for maintaining trust in public spending.
+    </p>
+
+    <div class="method-note">
+      <div class="kicker"><span class="dot"></span>Method Note &amp; Caveats</div>
+      <p>
+        Most “Pig-Bucket Expenditure” evidence is described through administrative tracking, secondary policy analysis, and comparative governance literature rather than a single standardized legal framework. A correlation between allocation and political outcomes (like turnout shifts) does not by itself establish intent, and results can vary widely based on local institutions, reporting practices, and how “yield” is operationalized.
+      </p>
+    </div>
+
+    <p>
+      Whether praised as strategic governance or criticized as politicized budgeting, Pig-Bucket Expenditure illustrates how modern public finance increasingly blends analytics, political incentives, and administrative design, reshaping how decisions about public resources are made.
+    </p>
+
+  </div>
+</article>
+
+<footer>
+  Editorial policy explainer with inline references to public governance and political economy research for context and verification.
+</footer>
+
+</div>
+</body>
+</html>

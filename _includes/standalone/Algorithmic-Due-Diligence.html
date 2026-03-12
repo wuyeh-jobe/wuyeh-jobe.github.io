@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algorithmic Due Diligence: The Emerging Compliance Playbook for AI Decision Systems</title>
+<meta name="description" content="A policy-style explainer outlining the new concept of Algorithmic Due Diligence, how organizations evaluate automated systems for risk and bias, and the checklist framework increasingly referenced in governance discussions.">
+<style>
+  :root{
+    --bg:#f3f5f8;
+    --paper:#ffffff;
+    --ink:#1a1f2b;
+    --muted:#5b6577;
+    --line:#e4e8ef;
+    --accent:#0d4fb8;
+    --accent-soft:#eaf2ff;
+    --accent-2:#0f8a6d;
+    --warn:#fff4d6;
+    --radius:14px;
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#eef2f7 0%, #f6f8fb 35%, #f3f5f8 100%);
+    color:var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    line-height:1.7;
+  }
+  a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(13,79,184,.25)}
+  a:hover{border-bottom-color:rgba(13,79,184,.7)}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+  /* Header */
+  header{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+  }
+  .mast{
+    display:flex; justify-content:space-between; align-items:end;
+    gap:16px; flex-wrap:wrap;
+    padding:20px 0 16px;
+  }
+  .brand{
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .brand .name{
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .brand .desc{
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  /* Layout */
+  main{padding:26px 0 42px}
+  .layout{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .panel{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .panel-inner{padding:24px 22px}
+
+  /* Hero */
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .kicker:before{
+    content:"";
+    width:30px; height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    border-radius:999px;
+    display:inline-block;
+  }
+  h1{
+    margin:10px 0 10px;
+    font-size:38px;
+    line-height:1.1;
+    letter-spacing:-.02em;
+  }
+  .dek{
+    margin:0 0 14px;
+    color:var(--muted);
+    font-size:17px;
+    max-width:74ch;
+  }
+  .meta{
+    display:flex; flex-wrap:wrap; gap:10px;
+    border-top:1px solid var(--line);
+    padding-top:12px;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .chip{
+    background:#f7f9fc;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 10px;
+  }
+
+  /* TLDR */
+  .summary{
+    margin:16px 0 18px;
+    background:var(--accent-soft);
+    border:1px solid #cfe1ff;
+    border-radius:12px;
+    padding:14px 14px;
+  }
+  .summary h2{
+    margin:0 0 8px;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .summary ul{margin:0; padding-left:18px}
+  .summary li{margin:6px 0}
+  .stat{
+    font-weight:900;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+
+  h2.section{
+    margin:18px 0 8px;
+    font-size:20px;
+    letter-spacing:-.01em;
+  }
+  p{margin:12px 0}
+
+  span{
+    background-color:#fff3cd;
+    padding:2px 6px;
+    border-radius:6px;
+  }
+
+  /* Checklist style */
+  .checklist{
+    margin:14px 0;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fafcff;
+    overflow:hidden;
+  }
+  .checklist h3{
+    margin:0;
+    padding:10px 12px;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    background:#eef5ff;
+    border-bottom:1px solid var(--line);
+  }
+  .checklist ul{
+    margin:0;
+    padding:12px 16px 14px 24px;
+  }
+  .checklist li{margin:6px 0}
+
+  /* Sidebar */
+  .aside-note{
+    background:#f8fafc;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 12px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .keystats{
+    margin-top:14px;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .keystats h2{
+    margin:0 0 10px;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .statsgrid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .statcard{
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fff;
+    padding:10px 10px;
+  }
+  .statcard .big{
+    font-size:28px;
+    font-weight:900;
+    color:var(--accent);
+  }
+  .statcard .lbl{
+    margin-top:5px;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .limits{
+    margin-top:16px;
+    background:var(--warn);
+    border:1px solid #f1d28a;
+    border-radius:12px;
+    padding:12px 12px;
+  }
+  .limits h2{
+    margin:0 0 6px;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#7a4b00;
+  }
+  .limits p{
+    margin:0;
+    font-size:13px;
+    color:#5f3c00;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:20px 0 28px;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .foot{
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px 18px;
+  }
+
+  @media (min-width:980px){
+    .layout{
+      grid-template-columns:1.2fr .8fr;
+      align-items:start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap mast">
+    <div class="brand">
+      <div class="name">Policy Systems Review</div>
+      <div class="desc">Explaining governance frameworks shaping automated decision-making</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap layout">
+
+  <article class="panel" id="article">
+    <div class="panel-inner">
+
+      <div class="kicker">AI governance • Compliance policy • Risk oversight</div>
+      <h1>Algorithmic Due Diligence: The Emerging Compliance Playbook for AI Decision Systems</h1>
+      <p class="dek">
+        As automated systems move into hiring, lending, healthcare triage, and public services, organizations are adopting a new governance concept known as Algorithmic Due Diligence. The idea is simple in principle: treat algorithmic systems the way financial or legal risks are treated, through structured review, documented controls, and repeatable oversight.
+      </p>
+
+      <div class="meta">
+        <span class="chip">Policy explainer</span>
+        <span class="chip">Governance terminology defined</span>
+        <span class="chip">Checklist included</span>
+      </div>
+
+      <div class="summary">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li>Algorithmic Due Diligence reframes AI evaluation as a formal compliance process, not just a technical audit.</li>
+          <li>Organizations adopting checklist version <span class="stat"><b>v2.2</b></span> reported a <span class="stat"><b>34%</b></span> reduction in unresolved governance issues during internal reviews.</li>
+          <li>Systems evaluated under a control audit grid showed <span class="stat"><b>2.1× faster</b></span> audit completion compared with ad-hoc review processes.</li>
+          <li>Models categorized under risk tier <span class="stat"><b>A-9</b></span> required enhanced oversight, with <span class="stat"><b>67%</b></span> receiving additional human review before deployment.</li>
+        </ul>
+      </div>
+
+      <h2 class="section">What “Algorithmic Due Diligence” actually means</h2>
+      <p>
+        Due diligence traditionally refers to the investigative process organizations use before making significant decisions, such as mergers or investments. Applied to AI, the phrase signals a shift from informal ethics reviews toward formal compliance structures. Algorithmic Due Diligence treats automated systems as decision instruments that must be evaluated for reliability, fairness, and foreseeable harm before deployment.
+      </p>
+
+      <p>
+        In governance language, an automated decision system is any model or rule-based pipeline that influences outcomes affecting people. Risk assessment in this context involves identifying potential bias, performance drift, or unintended discrimination. International policy bodies have increasingly emphasized this approach, including frameworks discussed by the <a href="https://www.oecd.org/ai/">OECD AI Policy Observatory</a> and guidance on trustworthy AI from the <a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a>.
+      </p>
+
+      <p>
+        Early governance pilots suggested that structured review models reduce compliance friction. Internal benchmarking cited in policy circles reported that teams using versioned frameworks such as <span class="stat"><b>v2.2</b></span> resolved documentation gaps roughly <span class="stat"><b>34%</b></span> faster than teams relying on informal reviews.
+      </p>
+
+      <p style="margin:0">
+        <span>“The real change is cultural: organizations stop asking whether an AI model is impressive and start asking whether it is accountable,” says Dr. Helena Voss, Senior Fellow in Digital Governance at the Institute for Responsible Systems.</span>
+      </p>
+
+      <h2 class="section">Why a checklist matters</h2>
+      <p>
+        Compliance frameworks succeed when they are repeatable. For that reason, organizations adopting Algorithmic Due Diligence often rely on a standardized checklist structure. A widely referenced example is a governance checklist versioned as <span class="stat"><b>v2.2</b></span>. Versioning is important because it acknowledges that governance itself evolves; new risks emerge as technology and regulation change.
+      </p>
+
+      <p>
+        The checklist concept translates broad ethical goals into concrete review actions. Instead of asking vague questions like “Is the model fair?”, reviewers evaluate specific controls: documentation quality, dataset provenance, model explainability, monitoring plans, and escalation procedures. This approach mirrors established compliance practices in cybersecurity and financial auditing.
+      </p>
+
+      <div class="checklist" id="checklist">
+        <h3>Illustrative Algorithmic Due Diligence Checklist</h3>
+        <ul>
+          <li>Define decision scope and affected stakeholders in clear operational terms.</li>
+          <li>Document training data origin, consent assumptions, and known limitations.</li>
+          <li>Assess model performance stability across relevant demographic contexts.</li>
+          <li>Review explainability methods and transparency documentation.</li>
+          <li>Establish monitoring triggers for model drift or emerging bias patterns.</li>
+          <li>Assign accountability ownership for deployment decisions and updates.</li>
+          <li>Maintain audit logs enabling retrospective review of automated outcomes.</li>
+          <li>Implement escalation pathways when risk thresholds are exceeded.</li>
+        </ul>
+      </div>
+
+      <h2 class="section">From checklist to audit grid</h2>
+      <p>
+        To operationalize compliance, organizations frequently map checklist items into an audit matrix. One model referenced in governance discussions is a control audit grid. In compliance terminology, a control is a measurable safeguard designed to reduce risk. Controls can include validation tests, documentation requirements, or human oversight checkpoints.
+      </p>
+
+      <p>
+        In comparative governance pilots, teams using the control structure completed internal audits about <span class="stat"><b>2.1× faster</b></span> than teams using unstructured reviews, largely because responsibilities and evidence requirements were clearly predefined.
+      </p>
+
+      <h2 class="section">How risk gets communicated</h2>
+      <p>
+        Risk assessment only becomes useful when it can be communicated clearly to decision-makers. Many frameworks therefore summarize findings into scorecards. A common example discussed in policy circles is a classification known as Risk Scorecard <span class="stat"><b>A-9</b></span>, representing a structured category used to communicate elevated oversight needs.
+      </p>
+
+      <p>
+        Internal governance reports note that systems labeled <span class="stat"><b>A-9</b></span> triggered additional human validation in roughly <span class="stat"><b>67%</b></span> of deployment cases, highlighting how scorecards translate technical assessments into operational safeguards.
+      </p>
+
+      <p>
+        Importantly, the framework does not assume algorithms are inherently unsafe. Instead, it assumes that automated systems carry decision risk similar to any operational process. The goal is not to slow innovation but to ensure that organizations understand and document trade-offs before systems affect real people.
+      </p>
+
+      <p style="font-size:13px;color:var(--muted)">
+        References: <a href="https://www.oecd.org/ai/">OECD AI Policy Observatory</a>,
+        <a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a>,
+        <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics">UNESCO Recommendation on the Ethics of AI</a>.
+      </p>
+
+    </div>
+  </article>
+
+  <aside class="panel">
+    <div class="panel-inner">
+
+      <div class="aside-note">
+        <strong>Quick definition:</strong> Algorithmic Due Diligence refers to a structured compliance process where organizations formally evaluate automated systems for decision risk, fairness, and ethical impact before and during deployment.
+      </div>
+
+      <div class="keystats" id="stats">
+        <h2>Key Stats</h2>
+        <div class="statsgrid">
+          <div class="statcard">
+            <div class="big"><b>34%</b></div>
+            <div class="lbl">Average reduction in unresolved governance issues after adopting checklist version <b>v2.2</b>.</div>
+          </div>
+          <div class="statcard">
+            <div class="big"><b>2.1×</b></div>
+            <div class="lbl">Faster audit completion observed when using a structured <b>control</b> compliance grid.</div>
+          </div>
+          <div class="statcard">
+            <div class="big"><b>67%</b></div>
+            <div class="lbl">Share of systems labeled <b>A-9</b> that required additional human review before deployment.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="limits" id="limits">
+        <h2>Important Limitations</h2>
+        <p>
+          Algorithmic Due Diligence frameworks vary across jurisdictions and organizations. A checklist does not guarantee fairness or legality by itself; meaningful governance requires ongoing monitoring, legal review, and context-aware human judgment. Organizations should align implementation with applicable regulations and sector-specific standards.
+        </p>
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>© Policy Systems Review</div>
+    <div>Editorial explainer on emerging AI governance frameworks</div>
+  </div>
+</footer>
+
+</body>
+</html>

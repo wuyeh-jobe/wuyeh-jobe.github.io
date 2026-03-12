@@ -7,10 +7,12 @@ layout: default
 <section class="home-section">
   <h2>Latest posts</h2>
   <ul class="post-list">
-    {% for post in site.posts limit:5 %}
+    {% for post in site.posts %}
       <li>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-        <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+        {% if post.description %}
+          <p class="post-description">{{ post.description }}</p>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>

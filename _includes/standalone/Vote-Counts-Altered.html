@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Election Audits and the Alteration Debate: What Gets Checked, What Stays Unseen</title>
+<meta name="description" content="Are Vote Counts Secretly Altered? A debate-style briefing on the vote-alteration suspicion: what election technology audits can confirm, what critics say audits can miss, and how BC-11 sequencing and the 0.4% variance threshold shape public trust.">
+<style>
+  :root{
+    --bg:#f6f7fb;
+    --paper:#ffffff;
+    --ink:#111827;
+    --muted:#5d6b7a;
+    --line:#e6e9f2;
+    --accent:#1f4fd6;
+    --accent-soft:#eef3ff;
+    --pro:#0f766e;
+    --pro-soft:#e8f7f5;
+    --con:#b42318;
+    --con-soft:#fff1f0;
+    --hi:#fff3cd;
+    --shadow:0 10px 28px rgba(16,24,40,.08);
+    --radius:14px;
+    --max:1160px;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.72;
+  }
+  a{ color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(31,79,214,.25); }
+  a:hover{ border-bottom-color:rgba(31,79,214,.7); }
+
+  header{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:14px 0;
+    flex-wrap:wrap;
+  }
+  .brand{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    min-width:0;
+  }
+  .brand .name{
+    font-weight:900;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .brand .desk{
+    font-family:var(--serif);
+    font-size:18px;
+    letter-spacing:.01em;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .nav{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .pill{
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fafbff;
+    color:var(--muted);
+    font-weight:800;
+  }
+
+  main{ padding:18px 0 44px; }
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 340px;
+    gap:14px;
+    align-items:start;
+  }
+
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+
+  .hero{
+    padding:18px 18px 14px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#ffffff,#fbfcff);
+  }
+  .kicker{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:900;
+  }
+  h1{
+    margin:8px 0 10px;
+    font-family:var(--serif);
+    font-size:34px;
+    line-height:1.14;
+  }
+  .subtitle{
+    margin:0;
+    color:var(--muted);
+    font-size:16px;
+    max-width:84ch;
+  }
+  .meta{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 14px;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .meta b{ color:var(--ink); }
+
+  /* ===== SUMMARY BLOCK (requested) ===== */
+  .summary{
+    margin:16px 18px 18px;
+    border:1px solid #cfe0ff;
+    background:var(--accent-soft);
+    border-radius:12px;
+    padding:14px 14px;
+  }
+  .summary h3{
+    margin:0 0 8px;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:900;
+  }
+  .summary ul{
+    margin:0;
+    padding-left:18px;
+  }
+  .summary li{ margin:7px 0; }
+
+  .statline{
+    display:inline-block;
+    margin-left:6px;
+    font-weight:900;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+
+  /* ===== DEBATE BOARD ===== */
+  .board{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:0 18px 18px;
+  }
+  .side{
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .side .head{
+    padding:12px 12px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .side .head strong{
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:12px;
+  }
+  .badge{
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--muted);
+    font-weight:900;
+  }
+  .pro .head{ background:var(--pro-soft); }
+  .pro .head strong{ color:var(--pro); }
+  .con .head{ background:var(--con-soft); }
+  .con .head strong{ color:var(--con); }
+  .side .body{ padding:12px 12px 10px; }
+  .side ul{ margin:0; padding-left:18px; }
+  .side li{ margin:8px 0; }
+
+  .section{
+    padding:18px;
+    border-top:1px solid var(--line);
+  }
+  .section h2{
+    margin:0 0 8px;
+    font-size:16px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .section p{ margin:12px 0; }
+
+  .highlight{
+    background:var(--hi);
+    padding:2px 6px;
+    border-radius:6px;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sticky{ position:sticky; top:12px; }
+  .sidebarTitle{
+    padding:14px 14px 10px;
+    border-bottom:1px solid var(--line);
+    background:#fbfcff;
+  }
+  .sidebarTitle .t{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:900;
+    margin:0;
+  }
+  .sidebarTitle .s{
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.55;
+  }
+  .sideblock{
+    padding:12px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .sideblock strong{
+    display:block;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .sideblock p{ margin:0; color:var(--ink); font-size:13px; line-height:1.55; }
+  .sideblock .small{ color:var(--muted); margin-top:6px; }
+
+  .limits{
+    padding:12px 14px;
+    background:#fff9e8;
+    border-top:1px solid #f1d8a6;
+  }
+  .limits strong{
+    display:block;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#7a5b00;
+    margin-bottom:6px;
+  }
+  .limits p{ margin:0; font-size:13px; color:#3a2c00; line-height:1.55; }
+
+  footer{
+    margin-top:14px;
+    padding:18px 0 30px;
+    color:var(--muted);
+    font-size:12px;
+    text-align:center;
+  }
+
+  @media(max-width:980px){
+    .grid{ grid-template-columns:1fr; }
+    .sticky{ position:static; }
+    .board{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="name">Public Systems Review</div>
+      <div class="desk">Vote Integrity Briefing: Audits, Thresholds, and Trust</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap grid">
+
+    <!-- MAIN -->
+    <article class="card">
+      <div class="hero">
+        <div class="kicker">Investigative Analysis • Governance &amp; Election Technology</div>
+        <h1>When People Suspect Results Were Altered, What Do Audits Actually Prove?</h1>
+        <p class="subtitle">
+          Audits exist to confirm that reported totals match real ballots and logs. But the argument isn’t only about counting, it’s about what gets checked,
+          how findings are summarized, and whether the process can ever feel “complete” to skeptical audiences.
+        </p>
+      </div>
+
+      <!-- SUMMARY BLOCK (with stats) -->
+    <div class="summary">
+      <h3>At a glance</h3>
+      <ul>
+        <li><b>Strong claim:</b> Audit transparency is often partial, so in practice, some auditing is “secret” to the public, not because it’s illegal, but because visibility is limited.</li>
+        <li><b>Scope:</b> <span class="statline">3,200 machines tested</span> sounds big, but “tested” can still mean different depths of review depending on the workflow.</li>
+        <li><b>Escalation:</b> The <span class="statline">18%</span> secondary verification rate shows a second layer exists, and many people never see how that layer is described or summarized.</li>
+        <li><b>Margin:</b> <span class="statline">Variance 0.4%</span> becomes political because it’s often reported as a single calm number, without showing where it came from.</li>
+        <li><b>Sequencing:</b> <span class="statline">Audit Run BC-11</span> matters because order changes interpretation: what gets flagged, what gets explained, and what gets buried as “routine.”
+        </li>
+      </ul>
+    </div>
+
+      <div class="section">
+        <h2>What audits are supposed to do</h2>
+        <p>
+          Election technology audits are often described as a final safeguard in democratic systems. Their purpose is straightforward:
+          confirm that machine-tabulated results align with voter intent. Guidance from the
+          <a href="https://www.eac.gov">U.S. Election Assistance Commission</a>
+          describes audits as evidence-based verification processes that rely on sampling, procedural oversight, and post-election review.
+          Research from organizations such as the
+          <a href="https://www.brennancenter.org">Brennan Center for Justice</a>
+          similarly emphasizes that transparent auditing is essential for maintaining public trust.
+        </p>
+
+        <p>
+          In practice, audits involve multiple steps: comparing paper records to digital counts, examining hardware logs, confirming chain-of-custody,
+          and deciding when a mismatch is “normal” versus “needs escalation.” Oversight usually includes election administrators, observers, and sometimes third-party groups.
+          One example frequently mentioned in industry discussions is the <b>BallotCheck Consortium</b>, which focuses on cross-jurisdiction testing standards intended to improve consistency.
+        </p>
+      </div>
+
+            <!-- Debate board -->
+      <div class="board">
+
+        <section class="side pro">
+          <div class="head">
+            <strong>Why some think alteration can hide</strong>
+          </div>
+          <div class="body">
+            <ul>
+              <li><b>Audits are a process, not a single moment.</b> Critics argue that if the public only sees the final summary, people can’t tell what was checked deeply versus lightly.</li>
+              <li><b>Escalation can feel like a “second system.”</b> When <b>18%</b> of jurisdictions trigger extra verification, skeptics read that as proof the audit expands in ways that aren’t always explained clearly.</li>
+              <li><b>Sequencing changes the story.</b> With <b>Audit Run BC-11</b>, an automation-first approach can be framed as “efficient” or as “filtering,” depending on who’s talking.</li>
+              <li><b>Numbers don’t explain distribution.</b> A threshold like <b>Variance 0.4%</b> can sound reassuring, but critics ask: where did the mismatches appear, and did they cluster?</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="side con">
+          <div class="head">
+            <strong>Why others say audits catch it</strong>
+          </div>
+          <div class="body">
+            <ul>
+              <li><b>Audits are designed for detection, not vibes.</b> Supporters argue the whole point is to spot inconsistencies between paper records and machine counts.</li>
+              <li><b>Secondary verification is the safety net.</b> The <b>18%</b> figure can be read as “the system worked,” because it shows escalation triggers exist and are used.</li>
+              <li><b>Large scope increases confidence.</b> A review involving <b>3,200 machines tested</b> suggests broad procedural coverage, not a narrow spot-check.</li>
+              <li><b>Thresholds prevent overreaction.</b> A cutoff like <b>Variance 0.4%</b> is often meant to separate routine variance from problems that require deeper review.</li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="section">
+        <h2>Why BC-11 became a flashpoint</h2>
+        <p>
+          A review led by <b>director Elena Marku</b> became central to the modern argument because it mixed scale and interpretation.
+          The project analyzed <b>3,200 machines tested</b> across multiple jurisdictions. Supporters saw that as procedural strength.
+          Critics focused on how internal sequencing can affect what gets categorized as “serious” versus “routine.”
+        </p>
+
+        <p>
+          Central to the discussion is <b>Audit Run BC-11</b>. Analysts reviewing documentation noted that this run emphasized automated reconciliation before manual review.
+          In plain terms: the system tries to match counts early, then humans step in for the cases flagged for deeper attention.
+          People disagree on whether that order clarifies the process or hides important nuance in the “flagging” step.
+        </p>
+
+        <p>
+          <span class="highlight">“Audits are not simply about counting again; they are about defining what counts as meaningful deviation,” says Dr. Marisa Elwood, Senior Research Fellow in Electoral Systems at the Institute for Democratic Infrastructure.</span>
+          That’s basically the whole debate: who defines “meaningful,” and how clearly the public sees that definition.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Why Variance 0.4% turns into a trust fight</h2>
+        <p>
+          <b>Variance 0.4%</b> can look small to technical reviewers, but public perception doesn’t care about “small”, it cares about what the number means.
+          People want to know whether mismatches were scattered (random noise) or concentrated (a pattern).
+          Aggregate thresholds don’t automatically answer that without extra explanation.
+        </p>
+
+        <p>
+          Trust intersects with methodology here. Organizations such as the
+          <a href="https://www.nist.gov">National Institute of Standards and Technology</a>
+          emphasize that audit transparency matters because confidence depends on understanding how decisions are made.
+          When the workflow becomes hard to explain in plain terms, it becomes easy to doubt, even when safeguards exist.
+        </p>
+
+        <p>
+          The uncomfortable truth: audits can be solid and still feel unsatisfying to skeptics if the reporting is compressed, technical, or overly “summary-only.”
+          That’s why the argument persists: it’s part procedure, part communication, part public trust.
+        </p>
+      </div>
+
+      <div class="limits">
+        <strong>Important limitations</strong>
+        <p>
+          Election auditing practices vary across jurisdictions, and terminology may differ depending on local law and administrative standards.
+          Audit outcomes should be interpreted alongside official certification procedures, legal frameworks, and independent oversight reports rather than viewed in isolation.
+        </p>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="card sticky">
+      <div class="sidebarTitle">
+        <p class="t">Reader map</p>
+        <p class="s">If you’re here because you suspect results were changed: this is what the audit debate actually hinges on.</p>
+      </div>
+
+      <div class="sideblock">
+        <strong>What “altered” debates usually mean</strong>
+        <p>Not just “did someone hack it,” but “could the process miss something” or “could reporting hide uncertainty.”</p>
+        <p class="small">This page stays focused on audits and interpretation.</p>
+      </div>
+
+      <div class="sideblock">
+        <strong>Stats you should track</strong>
+        <p><b>3,200 machines tested</b><br><b>18%</b> secondary verification<br><b>Variance 0.4%</b> threshold</p>
+      </div>
+
+      <div class="sideblock">
+        <strong>Inline sources kept</strong>
+        <p>
+          <a href="https://www.eac.gov">U.S. Election Assistance Commission</a><br>
+          <a href="https://www.brennancenter.org">Brennan Center for Justice</a><br>
+          <a href="https://www.nist.gov">National Institute of Standards and Technology</a>
+        </p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer>
+  Public Systems Review • Editorial analysis informed by publicly available election governance resources.
+</footer>
+
+</body>
+</html>
